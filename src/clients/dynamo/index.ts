@@ -1,6 +1,6 @@
 import * as AWS from 'aws-sdk';
 import hash from 'object-hash';
-import { ValidatedPerson } from '../../services/personValidator';
+import { ValidatedPerson } from '../../services/person-validator';
 
 interface DynamoClientInput {
   tableName: string
@@ -35,6 +35,6 @@ export default class DynamoClient {
         country: { S: person.Address.Country },
       },
     };
-    return this.client.putItem(params).promise();
+    return this.client.putItem(params);
   }
 }

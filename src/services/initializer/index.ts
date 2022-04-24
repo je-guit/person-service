@@ -17,6 +17,9 @@ export default class Initializer {
   constructor({ env }: InitializerInput) {
     const { LOG_LEVEL, TABLE_NAME } = env;
     this.configuration = { LOG_LEVEL, TABLE_NAME };
-    this.dynamoClient = new DynamoClient({ tableName: TABLE_NAME || '' });
+    if (!TABLE_NAME) {
+      throw new Error('No TABLE_NAME found in environment variables.');
+    }
+    this.dynamoClient = new DynamoClient({ tableName: TABLE_NAME });
   }
 }

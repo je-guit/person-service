@@ -1,8 +1,8 @@
 import { Context } from 'aws-lambda';
 import Initializer from '../../services/initializer';
 import Logger from '../../services/logger';
-import PersonValidator from '../../services/personValidator';
-import ResponseBuilder from '../../services/responseBuilder';
+import PersonValidator from '../../services/person-validator';
+import ResponseBuilder from '../../services/resoponse-builder';
 import { safeParse } from '../../utils';
 
 const { configuration, dynamoClient } = new Initializer({ env: process.env });
