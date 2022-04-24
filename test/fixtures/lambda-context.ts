@@ -1,6 +1,6 @@
 import { Context } from 'aws-lambda';
 
-const lambdaContext: Context = {
+const DEFAULT: Context = {
   callbackWaitsForEmptyEventLoop: true,
   functionName: 'string',
   functionVersion: 'string',
@@ -15,4 +15,4 @@ const lambdaContext: Context = {
   succeed: () => null,
 };
 
-export default lambdaContext;
+export default DEFAULT;

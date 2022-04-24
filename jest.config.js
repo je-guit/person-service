@@ -5,4 +5,9 @@ module.exports = {
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
+  setupFiles: ['<rootDir>/test/setup/set-env-vars.ts'],
+  resetMocks: true,
+  coveragePathIgnorePatterns: [
+    'test',
+  ],
 };
