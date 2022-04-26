@@ -39,7 +39,7 @@
     "aws-cdk-lib": "2.21.1",
     "aws-lambda": "^1.0.7",
     "aws-sdk": "^2.1120.0",
-    "constructs": "^10.0.124",
+    "constructs": "^10.0.126",
     "lodash": "^4.17.21",
     "object-hash": "^3.0.0",
     "source-map-support": "^0.5.21",
