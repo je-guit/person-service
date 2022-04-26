@@ -10,4 +10,5 @@ module.exports = {
   coveragePathIgnorePatterns: [
     'test',
   ],
+  collectCoverage: true,
 };

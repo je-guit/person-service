@@ -51,9 +51,4 @@ export default class Logger {
   public error(message: string, details?: LogDetails) {
     this.callLogger(this.logger.error, message, details);
   }
-
-  public throwLoggedError(message: string, details?: LogDetails) {
-    this.error(message, details);
-    throw new Error(message);
-  }
 }

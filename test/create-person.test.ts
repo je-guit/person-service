@@ -30,6 +30,12 @@ describe('Create person', () => {
     );
     expect(Logger.prototype.error).toHaveBeenCalledTimes(1);
   });
+  it('Returns 400 on empty request', async () => {
+    const result = await createPersonHandler(null, lambdaContext);
+    expect(result).toStrictEqual(responses.BAD_REQUEST_ALL_MISSING);
+    expect(DynamoClient.prototype.createPerson).toHaveBeenCalledTimes(0);
+    expect(Logger.prototype.error).toHaveBeenCalledTimes(0);
+  });
   it('Returns 400 on missing element', async () => {
     const result = await createPersonHandler(createPersonEvent.MISSING_NAME, lambdaContext);
     expect(result).toStrictEqual(responses.BAD_REQUEST_MISSING_NAME);

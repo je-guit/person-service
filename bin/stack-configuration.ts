@@ -2,7 +2,7 @@ import { PartialDeep } from 'type-fest';
 import { defaultsDeep } from 'lodash';
 import { PersonStackProps, Environment } from './stack-environment-types';
 
-const getStackConfiguration = (env: Environment, config: PartialDeep<PersonStackProps> = {})
+const getStackConfiguration = (env: Environment, config: PartialDeep<PersonStackProps>)
 : PersonStackProps => defaultsDeep({}, config, {
   environment: env,
   tags: {},

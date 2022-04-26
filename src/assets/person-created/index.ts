@@ -2,8 +2,7 @@ import { Context } from 'aws-lambda';
 import Initializer from '../../services/initializer';
 import Logger from '../../services/logger';
 
-// For simplicity reusing Initializer, this will create an unused dynamo client and should
-// not be used in production.
+// For simplicity reusing Initializer, note that this will create an unused dynamo client.
 const { configuration } = new Initializer({ env: process.env });
 
 export const handler = async (event: any, context: Context) => {

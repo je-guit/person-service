@@ -9,11 +9,11 @@ interface DynamoClientInput {
 export default class DynamoClient {
   private tableName: string;
 
-  private client: AWS.DynamoDB;
+  public client: AWS.DynamoDB.DocumentClient;
 
   constructor({ tableName }: DynamoClientInput) {
     AWS.config.update({ region: 'eu-west-1' });
-    this.client = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+    this.client = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
     this.tableName = tableName;
   }
 
@@ -21,20 +21,20 @@ export default class DynamoClient {
     const personHash = hash({
       first: person.FirstName, last: person.LastName, phone: person.TelephoneNumber,
     });
-    const params: AWS.DynamoDB.PutItemInput = {
+    const params: AWS.DynamoDB.DocumentClient.PutItemInput = {
       TableName: this.tableName,
       Item: {
-        id: { S: personHash },
-        firstName: { S: person.FirstName },
-        lastName: { S: person.FirstName },
-        telephoneNumber: { S: person.TelephoneNumber },
-        streetName: { S: person.Address.StreetName },
-        cityName: { S: person.Address.CityName },
-        buildingNumber: { S: person.Address.BuildingNumber },
-        postalCode: { S: person.Address.PostalCode },
-        country: { S: person.Address.Country },
+        id: personHash,
+        firstName: person.FirstName,
+        lastName: person.FirstName,
+        telephoneNumber: person.TelephoneNumber,
+        streetName: person.Address.StreetName,
+        cityName: person.Address.CityName,
+        buildingNumber: person.Address.BuildingNumber,
+        postalCode: person.Address.PostalCode,
+        country: person.Address.Country,
       },
     };
-    return this.client.putItem(params);
+    return this.client.put(params).promise();
   }
 }
