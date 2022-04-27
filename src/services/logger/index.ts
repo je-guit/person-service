@@ -16,7 +16,7 @@ interface LogContext {
 export default class Logger {
   private logContext: LogContext;
 
-  private logger: winston.Logger;
+  public logger: winston.Logger;
 
   constructor({ context, logLevel }: LoggerInput) {
     const {
