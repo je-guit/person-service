@@ -19,14 +19,14 @@ export default class DynamoClient {
 
   public async createPerson(person: ValidatedPerson) {
     const personHash = hash({
-      first: person.FirstName, last: person.LastName, phone: person.TelephoneNumber,
+      f: person.FirstName, l: person.LastName, t: person.TelephoneNumber,
     });
     const params: AWS.DynamoDB.DocumentClient.PutItemInput = {
       TableName: this.tableName,
       Item: {
         id: personHash,
         firstName: person.FirstName,
-        lastName: person.FirstName,
+        lastName: person.LastName,
         telephoneNumber: person.TelephoneNumber,
         streetName: person.Address.StreetName,
         cityName: person.Address.CityName,
