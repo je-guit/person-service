@@ -3,7 +3,7 @@ import { LambdaIntegration, RequestValidator } from 'aws-cdk-lib/aws-apigateway'
 import { AttributeType, StreamViewType } from 'aws-cdk-lib/aws-dynamodb';
 import { StartingPosition } from 'aws-cdk-lib/aws-lambda';
 import { DynamoEventSource, SqsDlq } from 'aws-cdk-lib/aws-lambda-event-sources';
-import { Queue } from 'aws-cdk-lib/aws-sqs';
+import { Queue, QueueEncryption } from 'aws-cdk-lib/aws-sqs';
 import { Construct } from 'constructs';
 import { PersonStackProps } from '../bin/stack-environment-types';
 import DynamoTable from './cdk-constructs/dynamo-table-construct';
@@ -57,10 +57,15 @@ export default class PersonServiceStack extends Stack {
     const personCreatedLambda = new Lambda(this, 'personCreated', {
       outputName: 'personCreatedLambda',
       entry: 'src/assets/person-created/index.ts',
+      environment: {
+        TABLE_NAME: personTable.tableName,
+        LOG_LEVEL: 'DEBUG',
+      },
     });
 
     const personCreatedDlq = new Queue(this, 'personCreatedDLQ', {
       retentionPeriod: Duration.days(7),
+      encryption: QueueEncryption.KMS_MANAGED,
     });
 
     personCreatedLambda.addEventSource(new DynamoEventSource(personTable, {
