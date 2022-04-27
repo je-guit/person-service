@@ -1,6 +1,6 @@
 # Serverless Person Service
 
-This basic person service stack build with CDK. 
+This is a simple person service stack build with CDK. 
 
 ## Business logic
 A person can be created by calling `/person [POST]` REST API with the appropriate api key.
